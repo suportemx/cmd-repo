@@ -27,4 +27,6 @@ lembrando que o valor da função copyCommand deverá ser o mesmo do id da tag t
 
 o id deverá ser único para cada comando.
 
+## para copiar comando pro clipboard
 
+basta dar um clique na linha selecionada que o comando será salvo no clipboard.
