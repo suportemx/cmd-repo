@@ -3,7 +3,7 @@ página html para armazenar comandos e buscar facilmente, geralmente usado para 
 
 ## para adicionar comando
 
-copie um bloco de código da tag tr
+copie um bloco de código da tag tr.
   
 ```sh
   <tr onclick="copyCommand('nmp1')">
@@ -14,7 +14,7 @@ copie um bloco de código da tag tr
   </tr>
 ```
 
-lembrando que o valor da função copyCommand deverá ser o mesmo do id da tag td
+lembrando que o valor da função copyCommand deverá ser o mesmo do id da tag td.
 
 ```sh
   <tr onclick="copyCommand('nmp2')">
@@ -25,6 +25,6 @@ lembrando que o valor da função copyCommand deverá ser o mesmo do id da tag t
   </tr>
 ```
 
-o id deverá ser único para cada comando
+o id deverá ser único para cada comando.
 
 
