@@ -6,12 +6,14 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
   <title>commander</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <style type="text/css">
     body{
-      background-color: #2a2a2a;
+      background-color: #282a36;
+      font-family: 'Fira Code';font-size: 14px;
     }
     table{
       counter-reset: row-num;
@@ -33,6 +35,25 @@
     }
     .alert{
       display: none;
+    }
+    /*Floating Back-To-Top Button*/
+    #myBtn {
+      position: sticky;
+      bottom: 10px;
+      float: right;
+      right: 5.5%;
+      left: 77.25%;
+      max-width: 30px;
+      width: 100%;
+      font-size: 12px;
+      border-color: rgba(85, 85, 85, 0.2);
+      background-color: rgb(100,100,100);
+      padding: .5px;
+      border-radius: 4px;
+    }
+    /*On Hover Color Change*/
+    #myBtn:hover {
+      background-color: #7dbbf1;
     }
   </style>
 </head>
@@ -69,7 +90,8 @@
     </div>
     <div class="col"></div>
     </div>
-  <script>
+    <button id="myBtn"><a href="#top" style="color: white">Top</a></button>
+    <script>
     function filterCommands() {
       var input, filter, table, tr, td, i, txtValue;
       input = document.getElementById("command");
