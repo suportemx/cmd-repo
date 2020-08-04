@@ -1,132 +1,784 @@
-<!-- Autor: Jonathan Messias -->
+<!-- Autor: Jonathan Messias | Marco Combat -->
 <!-- Github: https://github.com/jmessiass -->
 <!-- Linkedin: https://www.linkedin.com/in/jmessias/ -->
+
+<!-- Colaborador: Marco Combat -->
+<!-- https://br.linkedin.com/in/marcombat -->
+<!-- Menu fixed -->
+<!-- Highlight on search results -->
+<!-- Font Fira Code -->
+<!-- Light Colors -->
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
-  <title>commander</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <style type="text/css">
-    body{
-      background-color: #282a36;
-      font-family: 'Fira Code';font-size: 14px;
-    }
-    table{
-      counter-reset: row-num;
-    }
-    table tr{
-      counter-increment: row-num;
-      cursor: copy;
-      border-bottom: solid 1px #28a745;
-      border-top: solid 1px #28a745;
-    }
-    table tbody tr:hover{
-      background-color: #28a745;
-    }
-    table tbody tr td:first-child::before {
-      content: counter(row-num);
-    }
-    input{
-      margin: 0.5em 0;
-    }
-    .alert{
-      display: none;
-    }
-    /*Floating Back-To-Top Button*/
-    #myBtn {
-      position: sticky;
-      bottom: 10px;
-      float: right;
-      right: 5.5%;
-      left: 77.25%;
-      max-width: 30px;
-      width: 100%;
-      font-size: 12px;
-      border-color: rgba(85, 85, 85, 0.2);
-      background-color: rgb(100,100,100);
-      padding: .5px;
-      border-radius: 4px;
-    }
-    /*On Hover Color Change*/
-    #myBtn:hover {
-      background-color: #7dbbf1;
-    }
-  </style>
-</head>
-<body>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col"></div>
-      <div class="col-10">
-        <form class="form-inline">
-          <input class="form-control mr-sm-2" type="search" autofocus="" placeholder="comando" id="command" aria-label="Comando" onkeyup="filterCommands()">
-        </form>
-      </div>
-      <div class="col"></div>
-    </div>
-    <div class="row">
-      <div class="col"></div>
-      <div class="col-10">
-        <table class="table text-white table-borderless text-left" id="commands">
-          <tbody>
-            <tr onclick="copyCommand('cmd1')">
-              <td></td>
-              <td>cmd1</td>
-              <td id="cmd1">cmd1 -p 8888</td>
-              <td>esse comando e apenas um exemplo</td>
-            </tr>
-            <tr onclick="copyCommand('cmd2')">
-              <td></td>
-              <td>cmd2</td>
-              <td id="cmd2">cmd1 -l 8888</td>
-              <td>esse comando e apenas um outro exemplo</td>
-            </tr>
-          </tbody>
-        </table>
-    </div>
-    <div class="col"></div>
-    </div>
-    <button id="myBtn"><a href="#top" style="color: white">Top</a></button>
-    <script>
-    function filterCommands() {
-      var input, filter, table, tr, td, i, txtValue;
-      input = document.getElementById("command");
-      filter = input.value.toUpperCase();
-      table = document.getElementById("commands");
-      tr = table.getElementsByTagName("tr");
 
-      for (i = 0; i < tr.length; i++) {
-        td1 = tr[i].getElementsByTagName("td")[1];
-        td3 = tr[i].getElementsByTagName("td")[3];
-        if (td1 || td3) {
-          txtValue1 = td1.textContent || td1.innerText;
-          txtValue3 = td3.textContent || td3.innerText;
-          if (txtValue1.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
-          } else if (txtValue3.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
-          } else {
-            tr[i].style.display = "none";
-          }
-        }
+<head>
+   <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+   <link href='https://fonts.googleapis.com/css?family=Fira Code' rel='stylesheet'>
+   <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+   <link href='https://fonts.googleapis.com/css?family=Source Sans Pro' rel='stylesheet'>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+   <title>commander</title>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+   <!-- ----------------------------- -->
+   <!-- STYLE -->
+   <!-- ----------------------------- -->
+   <style type="text/css">
+      body {
+         background-color: #F8F9FA;
+         /*background-color: #282a36;*/
+         font-family: 'Fira Code';
+         font-size: 14px;
       }
-    }
-    function copyCommand(command) {
-      var range = document.createRange();
-      range.selectNode(document.getElementById(command));
-      window.getSelection().removeAllRanges();
-      window.getSelection().addRange(range);
-      document.execCommand("copy");
-      window.getSelection().removeAllRanges();
-      console.log(command);
-    }
-  </script>
-  <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+      table {
+         counter-reset: row-num;
+      }
+
+      table tr {
+         color: #000000;
+         counter-increment: row-num;
+         cursor: copy;
+         border-bottom: solid 1px #565B5C;
+         border-top: solid 1px #565B5C;
+      }
+
+      table tbody tr:hover {
+         /*background-color: #28a745;*/
+         background-color: #fcbe11;
+         color: #000000;
+
+      }
+
+      table tbody tr td:first-child::before {
+         content: counter(row-num);
+      }
+
+      input {
+         margin: 0.5em 0;
+      }
+
+      .alert {
+         display: none;
+      }
+
+      /*Floating Back-To-Top Button*/
+      #myBtn {
+         position: sticky;
+         bottom: 10px;
+         float: right;
+         right: 5.5%;
+         left: 77.25%;
+         max-width: 30px;
+         width: 100%;
+         font-size: 12px;
+         border-color: rgba(85, 85, 85, 0.2);
+         background-color: rgb(100, 100, 100);
+         padding: .5px;
+         border-radius: 4px;
+      }
+
+      /*On Hover Color Change*/
+      #myBtn:hover {
+         background-color: #7dbbf1;
+      }
+
+
+      .highlight {
+         background-color: #fff34d;
+         -moz-border-radius: 5px;
+         /* FF1+ */
+         -webkit-border-radius: 5px;
+         /* Saf3-4 */
+         border-radius: 5px;
+         /* Opera 10.5, IE 9, Saf5, Chrome */
+         -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+         /* FF3.5+ */
+         -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+         /* Saf3.0+, Chrome */
+         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+         /* Opera 10.5+, IE 9.0 */
+      }
+
+      .highlight {
+         padding: 1px 4px;
+         margin: 0 -4px;
+      }
+   </style>
+
+</head>
+
+<!-- --------------------------------------------------------------------- -->
+<!-- BODY -->
+<!-- --------------------------------------------------------------------- -->
+
+<body>
+
+   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Commands</a>
+
+      <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
+    </ul>-->
+      <!-- <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>-->
+
+      <form class="form-inline">
+         <input class="form-control mr-sm-2" type="search" autofocus="" placeholder="Search" id="command"
+            aria-label="Comando" onkeyup="filterCommands()">
+
+      </form>
+      </div>
+   </nav>
+
+   </br></br></br></br>
+
+
+   <div class="container-fluid">
+
+      <!-- <div class="row">
+         <div class="col"></div>
+         <div class="col-10">
+             <form class="form-inline">
+               <input class="form-control mr-sm-2" type="search" autofocus="" placeholder="comando" id="command" aria-label="Comando" onkeyup="filterCommands()">
+            </form>
+         </div>
+         <div class="col"></div>
+      </div> -->
+
+      <div class="row">
+         <div class="col"></div>
+         <div class="col-10">
+            <table class="table text-white table-borderless text-left" id="commands">
+
+
+               <!-- --------------------------------------------------------------------- -->
+               <!-- CONTENT -->
+               <!-- --------------------------------------------------------------------- -->
+               <tbody>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('pwd')">
+                     <td></td>
+                     <td>pwd</td>
+                     <td id="pwd">pwd</td>
+                     <td>Exibir path atual</td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('touch')">
+                     <td></td>
+                     <td>touch</td>
+                     <td id="touch">touch .[file]</td>
+                     <td>Criar arquivo oculto</br>
+                        Inserir ponto no início do nome do arquivo
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('cat')">
+                     <td></td>
+                     <td>cat | tac </td>
+                     <td id="cat">cat [file]</td>
+                     <td>Exibir conteúdo do arquivo.</br>
+                        Conteúdo invertido
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('head')">
+                     <td></td>
+                     <td>head</td>
+                     <td id="head / tail">head -n3 [file]</td>
+                     <td>Exibir 3 primeiras/últimas linhas do arquivo</td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('tail')">
+                     <td></td>
+                     <td>tail</td>
+                     <td id="tail">tail -f [file]</td>
+                     <td>Exibir final do arquivo em tempo real.</br>
+                        Ideal para analisar logs.
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('adduser')">
+                     <td></td>
+                     <td>adduser | deluser</td>
+                     <td id="adduser">adduser [name]</td>
+                     <td>Cria/Remove novo usuário já com senha</td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('adduser2')">
+                     <td></td>
+                     <td>adduser | deluser</td>
+                     <td id="adduser2">adduser [user] sudo</td>
+                     <td>Adiciona/Remove usuário do grupo sudo</td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('useradd')">
+                     <td></td>
+                     <td>useradd</td>
+                     <td id="useradd">useradd -d /opt/newUser -s /bin/bash newUser</td>
+                     <td>Cria novo usuário sem senha</br></br>
+                        # cat /etc/passwd</br>
+                        # cat /var/log/auth.log</br>
+                        # nano /etc/sudoers
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('passwd')">
+                     <td></td>
+                     <td>passwd</td>
+                     <td id="passwd">passwd [user]</td>
+                     <td>Cria senha para usuário</td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('scrcpy')">
+                     <td></td>
+                     <td>scrcpy</td>
+                     <td id="scrcpy">scrcpy</td>
+                     <td>Display and control of Android devices.</br>
+                        https://github.com/Genymobile/scrcpy
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('interfaces')">
+                     <td></td>
+                     <td>interfaces</td>
+                     <td id="interfaces">/etc/network/interfaces</td>
+                     <td>
+                        Manter configuração rede</br></br>
+                        auto eth0</br>
+                        iface eth0 inet static</br>
+                        address x.x.x.x</br>
+                        netmask x.x.x.x</br>
+                        gateway x.x.x.x</br></br>
+                        # service networking restart</br>
+                        # /etc/init.d/networking restart</br>
+                        # dhclient eth0</br>
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('route')">
+                     <td></td>
+                     <td>route</td>
+                     <td id="route">route -n</td>
+                     <td>
+                        # route add default gw x.x.x.x</br>
+                        # route del default </br>
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('netstat')">
+                     <td></td>
+                     <td>netstat</td>
+                     <td id="netstat">netstat -lntp</td>
+                     <td>Listar serviços TCP em execução</td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('apt')">
+                     <td></td>
+                     <td>apt</td>
+                     <td id="apt">/etc/apt/sources.list</td>
+                     <td>
+                        # apt update</br>
+                        # apt upgrade</br>
+                        # apt search [appName]</br>
+                        # apt install [appName] -y</br>
+                        # apt remove [appName]</br>
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('dpkg')">
+                     <td></td>
+                     <td>dpkg</td>
+                     <td id="dpkg">dpkg -i file.deb</td>
+                     <td>Instalar .deb</td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('service')">
+                     <td></td>
+                     <td>service</td>
+                     <td id="service">update-rc.d ssh enable|disable</td>
+                     <td>Iniciar ssh no boot</br></br>
+                        # service ssh start</br>
+                        # service ssh stop</br>
+                        # service ssh restart</br>
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('locate')">
+                     <td></td>
+                     <td>locate | whereis | which | find</td>
+                     <td id="locate">locate [fileName]</td>
+                     <td>Para atualizar o index de busca do locate</br></br>
+                        # updatedb</br>
+                        # find /home/ -name [fileName]</br>
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('passwd/bash')">
+                     <td></td>
+                     <td>passwd/bash</td>
+                     <td id="passwd/bash">cat /etc/passwd | grep "/bin/bash"</td>
+                     <td>Filtrar usuários com shell</br></br>
+                        Outro exemplo</br>
+                        # grep "/bin/bash" /etc/passwd > hasShell.txt</br>
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('grep')">
+                     <td></td>
+                     <td>grep | egrep</td>
+                     <td id="grep">grep -v "nologin" /etc/passwd</td>
+                     <td>Filtrar conteúdo diferente com -v</br></br>
+                        egrep para buscar mais de um conteúdo</br>
+                        # egrep -v "nologin|bin/false" /etc/passwd</br>
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('awk')">
+                     <td></td>
+                     <td>awk</td>
+                     <td id="awk">awk -F : '{print "User: "$1}' /etc/passwd</td>
+                     <td>Buscar conteúdo da coluna</br></br>
+                        -F para definir o limitador</br>
+                        {print $1,$6} exibe conteúdo da primeira e sexta coluna</br>
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('cut')">
+                     <td></td>
+                     <td>cut</td>
+                     <td id="cut">cut -d : -f1,6 /etc/passwd</td>
+                     <td>Buscar conteúdo da coluna. Mais simples que o #awk</br>
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('sed')">
+                     <td></td>
+                     <td>sed</td>
+                     <td id="sed">sed 's/[FROM]/[TO]' [file]</td>
+                     <td>Substituir palavras em arquivos</br></br>
+                        Ex. # sed 's/Dia/Noite' hora.txt</br>
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('wc')">
+                     <td></td>
+                     <td>wc</td>
+                     <td id="wc">wc -l [file]</td>
+                     <td>Total de linhas de um arquivo</br></br>
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('sort')">
+                     <td></td>
+                     <td>sort</td>
+                     <td id="sort">sort -u</td>
+                     <td>Quantidade de ocorrências ordenadas numericamente</br></br>
+                        # cat file.log | cut -d " " f1 | sort | uniq -c | sort -un</br>
+                        # sort -unr - Do Maior para menor
+                        # cat file.log | grep 'x.x.x.x' | grep "Nmap" | head -n1 | uniq -c
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('windows')">
+                     <td></td>
+                     <td>windows</td>
+                     <td id="windows">Comandos básicos</td>
+                     <td>Comandos básicos</br></br>
+                        $ echo %cd% </br>
+                        $ dir /a </br>
+                        $ mkdir [name] </br>
+                        $ echo [text] > [file.txt]</br>
+                        $ type [file.txt] </br>
+                        $ notepad [file.txt] </br>
+                        $ del [file.txt] </br>
+                        $ attrib /? </br>
+                        $ attrib -h [file] </br>
+                        $ rmdir /s [dir] </br>
+                        $ ipconfig /all </br>
+                        $ netstat -n | netstat -p tcp </br>
+                        $ taskkill -pid [number] </br>
+                        $ net user [userName] [pwd] /add </br>
+                        $ net user [userName] /delete </br>
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('apache')">
+                     <td></td>
+                     <td>apache</td>
+                     <td id="apache">Configurações</td>
+                     <td>Configurações</br></br>
+                        Remover "Indexes"</br>
+                        vim /etc/apache2/apache2.conf</br></br>
+                        ServerSignature Off</br>
+                        # vim /etc/apache2/conf-enabled/security.conf</br>
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('nc')">
+                     <td></td>
+                     <td>nc</td>
+                     <td id="nc">nc -v [x.x.x.x] [port]</td>
+                     <td>Estabelecer conexão</br></br>
+                        # nc -v x.x.x.x 80</br>
+                        GET / HTTP/1.0</br>
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('ping')">
+                     <td></td>
+                     <td>ping</td>
+                     <td id="nc">ping -c 1 [x.x.x.x]</td>
+                     <td>Enviar apenas 1 pacote</br>
+                     </td>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('printf')">
+                     <td></td>
+                     <td>printf</td>
+                     <td id="printf">printf %d 0x0181</td>
+                     <td>Converter HEX</br>
+                        # printf %d 0x0181</br>
+                        # cat /etc/protocols</br></br>
+                        Converter ASCII</br>
+                        # man ascii </br>
+                        # printf "\x41\n" </br>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('tcpdump')">
+                     <td></td>
+                     <td>tcpdump</td>
+                     <td id="tcpdump">tcpdump -vnr [file.pcap] src host [x.x.x.x] | cut -d "," -f1 | grep -v tos | grep
+                        -v "S" | grep "F\."</td>
+                     <td>Identificar Portscan</br>
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('script_ping')">
+                     <td></td>
+                     <td>script_ping</td>
+                     <td id="script_ping">
+                        #!/bin/bash<br />
+                        <br />
+                        if [ "$1" == "" ]<br />
+                        then<br />
+                        echo "Ping Sweep"<br />
+                        echo "Modo de uso: $0 REDE"<br />
+                        echo "Ex: $0 192.168.1"<br />
+                        else<br />
+                        for host in {1..254};<br />
+                        do<br />
+                        ping -c 1 $1.$host | grep "64 bytes"| cut -d " " -f 4 | sed 's/.$//';<br />
+                        done<br />
+                        fi<br />
+                     </td>
+                     <td> Script ping
+
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+                  <tr onclick="copyCommand('script_portscan')">
+                     <td></td>
+                     <td>script_portscan</td>
+                     <td id="script_portscan">
+                        #!/bin/bash<br />
+                        if [ $1 == "" ]<br />
+                        then<br />
+                        echo "PortScan Network"<br />
+                        echo "Modo de uso: $ REDE PORTA"<br />
+                        echo "Ex: $0 192.168.1 80"<br />
+                        else<br />
+                        for ip in {1..254};<br />
+                        do<br />
+                        sudo hping3 -S -p $2 -c 1 $1.$ip 2> /dev/null | grep "flags=SA" | cut -d " " -f2 | cut -d "="
+                        -f2;<br />
+                        done<br />
+                        fi<br />
+                     <td> Script PortScan</br>
+                        0> STDIN</br>
+                        1> STDOUT</br>
+                        2> STDERR</br>
+                        grep "href" index.html | cut -d "/" -f 3 | grep "\." | cut -d '"' -f 1 | grep -v "return" | sort --unique  
+
+
+
+                  </tr>
+
+                  <!-- ------------------------------------------------------------------------------------------ -->
+
+               </tbody>
+            </table>
+         </div>
+         <div class="col"></div>
+      </div>
+
+      <!-- --------------------------------------------------------------------- -->
+      <!-- SCRIPTS -->
+      <!-- --------------------------------------------------------------------- -->
+
+
+      <!-- Search Filter -->
+      <script>
+         function filterCommands() {
+
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("command");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("commands");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+
+               td1 = tr[i].getElementsByTagName("td")[1];
+               td3 = tr[i].getElementsByTagName("td")[3];
+               if (td1 || td3) {
+                  txtValue1 = td1.textContent || td1.innerText;
+                  txtValue3 = td3.textContent || td3.innerText;
+                  if (txtValue1.toUpperCase().indexOf(filter) > -1) {
+                     tr[i].style.display = "";
+                  } else if (txtValue3.toUpperCase().indexOf(filter) > -1) {
+                     tr[i].style.display = "";
+                  } else {
+                     tr[i].style.display = "none";
+                  }
+               }
+            }
+         }
+         function copyCommand(command) {
+            var range = document.createRange();
+            range.selectNode(document.getElementById(command));
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+            window.getSelection().removeAllRanges();
+            console.log(command);
+         }
+
+      </script>
+      <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+         integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+         crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+         crossorigin="anonymous"></script>
+
+      <!-- Highlight search result -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <script type="text/javascript">
+         jQuery.fn.highlight = function (pat) {
+
+            function innerHighlight(node, pat) {
+
+               var skip = 0;
+
+               if (node.nodeType == 3) {
+
+                  var pos = node.data.toUpperCase().indexOf(pat);
+
+                  if (pos >= 0) {
+
+                     var spannode = document.createElement('span');
+                     spannode.className = 'highlight';
+                     var middlebit = node.splitText(pos);
+                     var endbit = middlebit.splitText(pat.length);
+                     var middleclone = middlebit.cloneNode(true);
+
+                     spannode.appendChild(middleclone);
+                     middlebit.parentNode.replaceChild(spannode, middlebit);
+                     skip = 1;
+
+                  }
+
+               } else if (node.nodeType == 1 && node.childNodes && !/(script|style) /i.test(node.tagName)) {
+
+                  for (var i = 0; i < node.childNodes.length; ++i) {
+
+                     i += innerHighlight(node.childNodes[i], pat);
+
+                  }
+
+               }
+
+               return skip;
+
+            }
+
+            return this.each(function () {
+
+               innerHighlight(this, pat.toUpperCase());
+
+            });
+
+         };
+
+         jQuery.fn.removeHighlight = function () {
+
+            function newNormalize(node) {
+
+               for (var i = 0, children = node.childNodes, nodeCount = children.length; i < nodeCount; i++) {
+
+                  var child = children[i];
+
+                  if (child.nodeType == 1) {
+
+                     newNormalize(child);
+                     continue;
+
+                  }
+
+                  if (child.nodeType != 3) { continue; }
+
+                  var next = child.nextSibling;
+
+                  if (next == null || next.nodeType != 3) { continue; }
+
+                  var combined_text = child.nodeValue + next.nodeValue;
+                  new_node = node.ownerDocument.createTextNode(combined_text);
+                  node.insertBefore(new_node, child);
+                  node.removeChild(child);
+                  node.removeChild(next);
+                  i--;
+                  nodeCount--;
+
+               }
+
+            }
+
+            return this.find("span.highlight").each(function () {
+
+               var thisParent = this.parentNode;
+               thisParent.replaceChild(this.firstChild, this);
+               newNormalize(thisParent);
+
+            }).end();
+
+         };
+
+      </script>
+
+      <!-- Highlight search result -->
+      <script type="text/javascript">
+
+         $(function () {
+
+            $('#command').bind('keyup change', function (ev) {
+
+               // pull in the new value
+               var searchTerm = $(this).val();
+
+               // remove any old highlighted terms
+               $('body').removeHighlight();
+
+               // disable highlighting if empty
+               if (searchTerm) {
+
+                  // highlight the new term
+                  $('body').highlight(searchTerm);
+
+               }
+
+            });
+
+         });
+
+      </script>
+
+      <button id="myBtn"><a href="#top" style="color: white">Top</a></button>
+
 </body>
+
 </html>
